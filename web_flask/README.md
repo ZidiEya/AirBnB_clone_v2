@@ -1,0 +1,2 @@
+GitHub repository: holbertonschool-AirBnB_clone_v2
+Directory: web_flask
