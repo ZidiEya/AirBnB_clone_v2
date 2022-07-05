@@ -1,43 +1,51 @@
 #!/usr/bin/python3
 """script that starts a Flask web application """
 from flask import Flask, render_template
+
+
 app = Flask(__name__)
+app.url_map.strict_slashes = False
 
 
-@app.route('/', strict_slashes=False)
-def index():
-    return 'Hello HBNB!'
+@app.route('/')
+def hello_route():
+    """web app that displays 'Hello HBNB' at route:'/' """
+    return "Hello HBNB!"
 
 
-@app.route('/hbnb', strict_slashes=False)
-def print_hbnb():
-    return 'HBNB'
+@app.route('/hbnb')
+def HBNB_route():
+    """ web app that displays 'HBNB' at route:'/hbnb' """
+    return "HBNB"
 
 
-@app.route('/c/<text>', strict_slashes=False)
-def print_cmsg(text):
-    # printing msg with specific info
-    return 'C %s' % text.replace('_', ' ')
+@app.route('/c/<text>')
+def c_route(text):
+    """/c/<text>: , followed by value of the text variable
+(replace underscore _ symbols with a space)"""
+    return "C " + text.replace("_", " ")
 
 
-@app.route('/python', strict_slashes=False)
-@app.route('/python/<text>', strict_slashes=False)
-def print_pymsg(text="is cool"):
-    # printing msg with specific info
-    return 'Python {}'.format(text.replace('_', ' '))
+@app.route('/python', defaults={'text': 'is cool'})
+@app.route('/python/<text>')
+def python_route(text):
+    """/python/<text>: , followed by value of the
+text variable (replace underscore _ symbols with a space )"""
+    return "Python " + text.replace("_", " ")
 
 
-@app.route('/number/<int:n>', strict_slashes=False)
-def print_number(n):
-    return '{:d} is a number'.format(n)
+@app.route('/number/<int:n>')
+def number_route(n):
+    """/number/<n>: n is a  only if n is an integer"""
+    return "{} is a number".format(n)
 
 
-@app.route('/number_template/<int:n>', strict_slashes=False)
+@app.route('/number_template/<int:n>')
 def number_template(n):
-    """ returning template at the /number_template/<n> route """
-    return render_template('5-number.html', value=n)
+    """/number_template/<n>: display a HTML page only if n is an integer:
+H1 Number:  inside the tag BODY"""
+    return render_template('5-number.html', n=n)
 
 
 if __name__ == "__main__":
-    """ Initial configuration for flaks  """
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run()ntag: numberdisplay Python display C display 
