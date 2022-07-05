@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""script that starts a Flask web application """
+"""script that start a Flask web application """
 from flask import Flask, render_template
 app = Flask(__name__)
 
@@ -34,8 +34,14 @@ def print_number(n):
 
 @app.route('/number_template/<int:n>', strict_slashes=False)
 def number_template(n):
-    """ returning template at the /number_template/<n> route """
-    return render_template('5-number.html', value=n)
+    """ returning a template at the /number_template/<n> route """
+    return render_template('5-number.html', number=n)
+
+
+@app.route('/number_odd_or_even/<int:n>', strict_slashes=False)
+def number_odd_even(n):
+    """ Returning a template at the /number_odd_or_even/<int:n> route """
+    return render_template('6-number_odd_or_even.html', number=n)
 
 
 if __name__ == "__main__":
